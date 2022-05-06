@@ -1,0 +1,41 @@
+# This file controls the behavior of line input editing for programs which use
+# the GNU Readline library.
+#
+# The inputrc file can be re-read using <C-x> <C-r>.
+# Lines beginning with '#' are comments.
+
+# Include any system-wide bindings and variable assignments from /etc/Inputrc
+$include /etc/inputrc
+
+# Performs filename matching and completion in a case-insensitive fashion.
+set completion-ignore-case on
+
+# Treat hyphens (-) and underscores (_) as equivalent when performing case-insensitive filename matching and completion.
+# Requires `completion-ignore-case on`
+set completion-map-case on
+
+# Configure the terminal in a way that will enable it to insert each paste into the editing buffer as a single string of
+# characters, instead of treating each character as if it had been read from the keyboard. This can prevent pasted
+# characters from being interpreted as editing commands.
+set enable-bracketed-paste
+
+# Displays possible completions using different colors to indicate their file type.
+set colored-stats on
+
+# Completed names which are symbolic links to directories have a slash appended.
+set mark-symlinked-directories on
+
+# Words which have more than one possible completion cause the matches to be listed immediately instead of ringing the
+# bell.
+set show-all-if-ambiguous
+
+# Do not insert characters from the completion that match characters after point in the word being completed, so
+# portions of the word following the cursor are not duplicated.
+set skip-completed-text on
+
+# Add history searching. That is, map the up and down arrow keys to search for
+# completions from the current line from command history.
+# eg. If "git" is typed, hitting UP will move to the most recent "git" command
+#     in history.
+"\e[A": history-search-backward
+"\e[B": history-search-forward
