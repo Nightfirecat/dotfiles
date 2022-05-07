@@ -62,3 +62,6 @@ export SHELLCHECK_OPTS='--color'
 if [ -z "$SSH_AUTH_SOCK" ]; then
 	eval "$(ssh-agent -s)"
 fi
+
+# if running interactively, source .bashrc
+[ -n "$PS1" ] && source "$HOME/.bashrc"
