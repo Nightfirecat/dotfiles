@@ -33,7 +33,7 @@
 	autocrlf = false
 	fscache = true
 	longpaths = true
-	pager = less -x1,5
+	pager = less -FX -x1,5
 	whitespace = cr-at-eol,tabwidth=4,trailing-space
 [diff]
 	colormoved = default
