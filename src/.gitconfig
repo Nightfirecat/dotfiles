@@ -1,4 +1,6 @@
 [alias]
+	# TODO: fix columnizing (-l arg with v2.37+, or some other workaround?)
+	# TODO: wrap command column for long commands
 	alias = !git config --get-regexp '^alias\\.' | cut -d '.' -f '2-' | sed -re 's/^([^ ]+) /\\1*/g' | column -s '*' -t | sort
 	amend = commit --amend
 	amend-a = commit -a --amend
