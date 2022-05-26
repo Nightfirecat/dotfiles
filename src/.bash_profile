@@ -17,6 +17,9 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="/run/user/$UID"
 
+# x settings
+export GTK_IM_MODULE="xim"  # use x input method for GTK apps
+
 # Default editor
 hash vim >/dev/null 2>&1 && export EDITOR='vim' VISUAL='vim'
 

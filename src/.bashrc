@@ -9,6 +9,9 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# source x mod map (if any)
+[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+
 
 ### shell options
 # set shell options
