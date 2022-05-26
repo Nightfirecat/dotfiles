@@ -54,6 +54,13 @@
 [include]
 	# Define system-specific user configs such as GPG signing key
 	path = ~/.user.gitconfig
+[pager]
+	# Build or install `diff-highlight` to some $PATH present location for
+	# improved diff highlights. Falls back on plain `core.pager` if not present.
+	# See: https://git.kernel.org/pub/scm/git/git.git/tree/contrib/diff-highlight/README
+	diff = (type diff-highlight >/dev/null 2>&1 && diff-highlight | $(git config core.pager)) || $(git config core.pager)
+	log = (type diff-highlight >/dev/null 2>&1 && diff-highlight | $(git config core.pager)) || $(git config core.pager)
+	show = (type diff-highlight >/dev/null 2>&1 && diff-highlight | $(git config core.pager)) || $(git config core.pager)
 [push]
 	default = current
 [rebase]
