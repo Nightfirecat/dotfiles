@@ -95,7 +95,6 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias diff='diff -uN --color=auto'
 alias ip='ip --color=auto'
-alias mount='mount | column -t'
 alias tree='tree -Csuh'
 
 # simple shortcuts
