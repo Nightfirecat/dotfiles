@@ -1,11 +1,12 @@
 [alias]
 	alias = !git config --get-regexp '^alias\\.' | cut -d '.' -f '2-' | sed -re 's/^([^ ]+) /\\1*/g' | column -s '*' -t | sort
-	amend = commit --amend --no-edit
-	amend-all = commit -a --amend --no-edit
+	amend = commit --amend
+	amend-a = commit -a --amend
 	# TODO: fix below; that method is not accurate
 #	check-merge = "!f() { output=$(git format-patch ${1:-master} --stdout | git apply --3way --check - 2>/dev/null); exit_code=$?; if [ $exit_code != '0' ] && [ $exit_code != '128' ]; then echo 'Merge conflicts exist! See `git apply` output below:'; echo; echo $output; fi; }; f"
 	co-pr = "!f() { [ $# -ne 2 ] && echo 'Two arguments required, PR # and branch name' && exit 1; git fetch upstream pull/$1/head:$2-$1 && git checkout $2-$1 && git merge master --no-gpg-sign --no-edit; }; f"
 	fixup = commit --amend --no-edit
+	fixup-a = commit -a --amend --no-edit
 	ll = log --pretty=format:"%C(yellow)%h%C(red)%d%C(reset)\\ %s\\ %C(blue)%C(bold)[%aN]%C(reset)" --decorate --numstat
 	lo = log --oneline --decorate
 	ls = log --pretty=format:"%C(yellow)%h%C(red)%d%C(reset)\\ %s\\ %C(blue)%C(bold)[%aN]%C(reset)" --decorate
