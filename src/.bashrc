@@ -93,9 +93,11 @@ alias less='less -R'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias diff='diff -uN --color=auto'
+alias diff='diff -uNr --color=auto'
 alias ip='ip --color=auto'
 alias tree='tree -Csuh'
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
 
 # simple shortcuts
 alias aliases='alias -p'
