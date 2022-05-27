@@ -41,6 +41,12 @@ elif [ $remove -eq 0 ]; then
 
 	# Symlink files to $HOME, overwrite old symlinks
 	for file in "${copy_files[@]}"; do
-		ln -svf "${SRC_DIR}/${file}" "${HOME}/${file}"
+		source="${SRC_DIR}/${file}"
+		target="${HOME}/${file}"
+		if [[ -h "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
+			echo "Skipping '${source}' -> '${target}' link as it is already linked"
+		else
+			ln -sv "${SRC_DIR}/${file}" "${HOME}/${file}"
+		fi
 	done
 fi
