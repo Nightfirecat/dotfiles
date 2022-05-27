@@ -1,0 +1,22 @@
+# don't search the parents of the home directory
+root = true
+
+# default rules for all files
+[*]
+# LF line endings
+end_of_line = lf
+# enforce trailing newline
+insert_final_newline = true
+# use 4-character-width tabs for indentation
+indent_style = tab
+indent_size = 4
+# default to utf-8 charset
+charset = utf-8
+# disallow trailing whitespace
+trim_trailing_whitespace = true
+
+# web development files
+[*.{html,css,scss,js,ts}]
+# use 2 spaces for indentation
+indent_style = space
+indent_size = 2
