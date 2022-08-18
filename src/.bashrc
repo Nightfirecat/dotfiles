@@ -134,6 +134,10 @@ alias la='ll -A'
 # only performs `ssh-add` on files in ~/.ssh/ which have a header indicating
 # they are SSH keys, and which are not loaded in the agent
 function _bashrc_ssh-add-keys {
+	if ! [ -d ~/.ssh ]; then
+		return
+	fi
+
 	if ! grep -E -q -- '-BEGIN (OPENSSH|RSA) PRIVATE KEY-' ~/.ssh/*; then
 		return
 	fi
