@@ -5,6 +5,9 @@
 mkdir -vp "$HOME/.bin"
 export PATH="${PATH}:$HOME/.bin"
 
+# some programs (pip, notably) install into ~/.local/bin, add that to PATH too
+export PATH="${PATH}:$HOME/.local/bin"
+
 # bash options
 export HISTCONTROL=ignoreboth
 export HISTSIZE=1000
