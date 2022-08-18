@@ -453,31 +453,10 @@ function _ps1_color {
 	echo -e "$color"
 }
 
-# PS1 builder and history appender
-# see _ps1_color for color reference for each PS1 segment
-# Note: all non-printing sequences must be surrounded by \[ \]
-# Note: bash PS1 title can only reference variables eg. $PWD
-#       (calling functions causes errors in title eg. pwd)
+# history appender
 function _bashrc_prompt_command {
-	# this must run first to capture exit status
-	local EXIT="$?"
-
 	# append last command to history
 	history -a
-
-	# set window title
-	# format:  $PWD; $?=#
-	PS1='\[\e]0;'"$PWD"'; \$?='"$EXIT"'\007\]'
-	PS1+='\n'
-
-	# set first line
-	# format:  [user@host path] (git branch)
-	PS1+='\[$(_ps1_color bracket)\][\[$(_ps1_color user)\]\u\[$(_ps1_color @)\]@\[$(_ps1_color host)\]\[$(hostname -f 2>/dev/null || hostname)\] \[$(_ps1_color path)\]\w\[$(_ps1_color bracket)\]]\[$(_ps1_color branch)\]\[$(__git_ps1 2>/dev/null)\]\[$(_ps1_color prompt)\]'
-	PS1+='\n'
-
-	# set second line
-	# format:  $
-	PS1+='\[$(_ps1_color preprompt)\]\$\[$(_ps1_color prompt)\] '
 }
 
 # exit function
@@ -628,6 +607,25 @@ _bashrc_ssh-add-keys
 # echo motd
 _bashrc_motd
 
-# sets PS1, appends to history
-PROMPT_COMMAND="_bashrc_prompt_command"
+### set PS1/PS2, appends to history
+
+# see _ps1_color for color reference for each PS1 segment
+# Note: all non-printing sequences must be surrounded by \[ \]
+# Note: bash PS1 title can only reference variables eg. $PWD
+#       (calling functions causes errors in title eg. pwd)
+
+# set window title
+# format:  $PWD; $?=#
+PS1='\[\e]0;'"$PWD"'; \$?=$?\007\]'
+PS1+='\n'
+
+# set first line
+# format:  [user@host path] (git branch)
+PS1+='\[$(_ps1_color bracket)\][\[$(_ps1_color user)\]\u\[$(_ps1_color @)\]@\[$(_ps1_color host)\]\[$(hostname -f 2>/dev/null || hostname)\] \[$(_ps1_color path)\]\w\[$(_ps1_color bracket)\]]\[$(_ps1_color branch)\]\[$(__git_ps1 2>/dev/null)\]\[$(_ps1_color prompt)\]'
+PS1+='\n'
+
+# set second line
+# format:  $
+PS1+='\[$(_ps1_color preprompt)\]\$\[$(_ps1_color prompt)\] '
 PS2='\[$(_ps1_color preprompt)\]>\[$(_ps1_color prompt)\] '
+PROMPT_COMMAND="_bashrc_prompt_command"
