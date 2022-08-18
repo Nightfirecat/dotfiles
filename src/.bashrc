@@ -241,6 +241,11 @@ function _bashrc_randomcolor {
 
 # prints a message of the day (time, shell info, system info, etc.)
 function _bashrc_motd {
+	if type screenfetch >/dev/null; then
+		screenfetch
+		return
+	fi
+
 	local kernel_string uptime_seconds uptime_msg cpuinfo cpu_model cpu_cores \
 	      cpu_msg k mem_decimals mem_units mem_label mem_percent_free \
 	      mem_danger_cutoff_limit mem_danger_cutoff_percent \
