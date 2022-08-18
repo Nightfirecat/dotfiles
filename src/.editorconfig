@@ -20,3 +20,8 @@ trim_trailing_whitespace = true
 # use 2 spaces for indentation
 indent_style = space
 indent_size = 2
+
+# markdown
+[*.md]
+# permit trailing whitespace (it can be used for single line breaks)
+trim_trailing_whitespace = false
