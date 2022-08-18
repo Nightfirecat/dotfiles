@@ -246,7 +246,7 @@ function _bashrc_randomcolor {
 # prints a message of the day (time, shell info, system info, etc.)
 function _bashrc_motd {
 	if type screenfetch >/dev/null; then
-		screenfetch
+		screenfetch 2>/dev/null
 		return
 	fi
 
