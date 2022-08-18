@@ -10,7 +10,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # source x mod map (if any)
-[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+[ -f ~/.Xmodmap ] && type xmodmap >/dev/null 2>/dev/null && xmodmap ~/.Xmodmap
 
 
 ### shell options
