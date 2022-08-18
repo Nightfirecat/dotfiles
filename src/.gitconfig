@@ -56,6 +56,8 @@
 [include]
 	# Define system-specific user configs such as GPG signing key
 	path = ~/.user.gitconfig
+[log]
+	follow = true
 [pager]
 	# Build or install `diff-highlight` to some $PATH present location for
 	# improved diff highlights. Falls back on plain `core.pager` if not present.
