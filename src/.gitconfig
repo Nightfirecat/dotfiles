@@ -27,9 +27,6 @@
 	sur = submodule update --recursive
 [apply]
 	whitespace = fix
-[branch]
-	autosetupmerge = always
-	autosetuprebase = always
 [color]
 	branch = auto
 	diff = auto
