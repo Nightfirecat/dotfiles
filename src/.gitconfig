@@ -17,6 +17,7 @@
 	ls = log --pretty=format:"%C(yellow)%h%C(red)%d%C(reset)\\ %s\\ %C(blue)%C(bold)[%aN]%C(reset)" --decorate
 	lsd = log --pretty=format:"%C(yellow)%h\\ %ad%C(red)%d%C(reset)\\ %s\\ %C(blue)%C(bold)[%aN]%C(reset)" --decorate --date=short
 	lsdr = log --pretty=format:"%C(yellow)%h\\ %ad%C(red)%d%C(reset)\\ %s\\ %C(blue)%C(bold)[%aN]%C(reset)" --decorate --date=relative
+	numstat = diff --numstat
 	pullf = pull --ff-only
 	pullfsur = !git pull --ff-only && git submodule update --recursive
 	pullr = pull --rebase
@@ -24,6 +25,7 @@
 	pullrsur = !git pull --rebase && git submodule update --recursive
 	pullrsurp = !git pull --rebase && git submodule update --recursive && git push
 	reword = commit --amend
+	shortstat = diff --shortstat
 	sur = submodule update --recursive
 [apply]
 	whitespace = fix
