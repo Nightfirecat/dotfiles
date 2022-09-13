@@ -22,7 +22,7 @@ directory](https://wiki.archlinux.org/title/XDG_Base_Directory#User_directories)
 2. Run `setup.sh`
 
    ```sh
-   "${XDG_CONFIG_HOME:-"$HOME"/.config}"/dotfiles/setup.sh
+   "${XDG_CONFIG_HOME:-$HOME/.config}"/dotfiles/setup.sh
    ```
 
 Once completed, all necessary symlinks will be created for environment setup. Restart your login for the `.bash_profile`
