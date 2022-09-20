@@ -16,7 +16,7 @@ directory](https://wiki.archlinux.org/title/XDG_Base_Directory#User_directories)
 
    ```sh
    cd "${XDG_CONFIG_HOME:-$HOME/.config}"
-   git clone https://github.com/Nightfirecat/dotfiles.git
+   git clone https://git.nightfirec.at/nightfirecat/dotfiles.git
    ```
 
 2. Run `setup.sh`
