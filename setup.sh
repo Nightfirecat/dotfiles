@@ -14,8 +14,11 @@ DIR="$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )"
 SRC_DIR="$DIR/src"
 
 # read file basenames to copy_files array
-readarray -d '' copy_files < <(find "$SRC_DIR" -type f -printf '%f\0')
+copy_files=()
 files_to_remove=()
+while IFS=  read -r -d $'\0'; do
+	copy_files+=( "$(basename "$REPLY")" )
+done < <(find "$SRC_DIR" -type f -print0)
 
 if [ $remove -eq 1 ]; then
 	for file in "${copy_files[@]}"; do
