@@ -13,6 +13,9 @@ export HISTCONTROL=ignoreboth
 export HISTSIZE=1000
 export HISTFILESIZE=5000
 
+# suppress bash deprecation warning on MacOS
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # XDG
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
