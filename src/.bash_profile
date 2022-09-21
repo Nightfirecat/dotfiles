@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ### environment vars
 # Ensure $HOME/.bin exists, add it to PATH

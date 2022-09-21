@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # Accept the `--remove` argument to delete symlinks of the files to be copied
