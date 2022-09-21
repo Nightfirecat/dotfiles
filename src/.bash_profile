@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# source ~/.profile if it exists
+if [ -f ~/.profile ]; then
+	# shellcheck disable=SC1090
+	. ~/.profile
+fi
+
 ### environment vars
 # Ensure $HOME/.bin exists, add it to PATH
 mkdir -vp "$HOME/.bin"
