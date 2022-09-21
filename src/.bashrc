@@ -5,7 +5,6 @@
 
 # source global definitions (if any)
 if [ -f /etc/bashrc ]; then
-	# shellcheck disable=SC1091
 	. /etc/bashrc
 fi
 
@@ -566,7 +565,6 @@ function .9 {
 # programmable completion
 # source available completion file
 if [ -f /etc/bash_completion ]; then
-	# shellcheck disable=SC1091
 	. /etc/bash_completion
 fi
 
