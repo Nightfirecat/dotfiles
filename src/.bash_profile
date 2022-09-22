@@ -43,7 +43,7 @@ if hash less >/dev/null 2>&1; then
 	# Enhanced man pages
 	export MANPAGER='less -R -s -M'
 
-	if [ "$(less -V | head -n 1 | cut -f 2 -d' ' )" -ge 580 ]; then
+	if [ "$(less -V | head -n 1 | cut -f 2 -d ' ' | cut -f 1 -d '.' )" -ge 580 ]; then
 		export MANPAGER="${MANPAGER} --use-color -Dd+r -Du+b"
 	else
 		# Add man page colors
