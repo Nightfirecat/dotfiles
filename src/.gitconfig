@@ -26,6 +26,7 @@
 	pullrsurp = !git pull --rebase && git submodule update --recursive && git push
 	reword = commit --amend
 	shortstat = diff --shortstat
+	stat = diff --stat
 	sur = submodule update --recursive
 [apply]
 	whitespace = fix
