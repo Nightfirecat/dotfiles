@@ -3,7 +3,7 @@ set -e
 
 # Accept the `--remove` argument to delete symlinks of the files to be copied
 # This is useful for testing a clean installation (eg. `setup.sh --remove && setup.sh`)
-# Note: Normal setup overwrites all old symlinks, so re-installation in place is idempotent
+# Note: Normal setup overwrites all incorrect symlinks, so re-installation in place is idempotent
 if [ "$1" == '--remove' ]; then
 	remove=1
 else
@@ -42,14 +42,14 @@ elif [ $remove -eq 0 ]; then
 		exit 1
 	fi
 
-	# Symlink files to $HOME, overwrite old symlinks
+	# Symlink files to $HOME, overwrite incorrect symlinks
 	for file in "${copy_files[@]}"; do
 		source="${SRC_DIR}/${file}"
 		target="${HOME}/${file}"
 		if [[ -h "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
 			echo "Skipping '${source}' -> '${target}' link as it is already linked"
 		else
-			ln -sv "${SRC_DIR}/${file}" "${HOME}/${file}"
+			ln -sv "$source" "$target"
 		fi
 	done
 fi
