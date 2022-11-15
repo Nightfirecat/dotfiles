@@ -47,10 +47,11 @@ for file in settings.json keybindings.json; do
 	target="$VSCODE_CONFIG_PATH/$file"
 	if [[ -h "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
 		echo "Skipping '$source' -> '$target' link as it is already linked"
+		continue
 	elif [[ -f "$target" ]]; then
 		mv "$target" "$target.bak"
 		echo "Backed up existing $file to $target.bak"
-	else
-		ln -sv "$source" "$target"
 	fi
+
+	ln -sv "$source" "$target"
 done
