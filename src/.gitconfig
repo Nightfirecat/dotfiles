@@ -12,6 +12,7 @@
 	         }; f"
 	fixup = commit --amend --no-edit
 	fixup-a = commit -a --amend --no-edit
+	full-diff = !git --no-pager diff
 	ll = log --pretty=format:"%C(yellow)%h%C(red)%d%C(reset)\\ %s\\ %C(blue)%C(bold)[%aN]%C(reset)" --decorate --numstat
 	lo = log --oneline --decorate
 	ls = log --pretty=format:"%C(yellow)%h%C(red)%d%C(reset)\\ %s\\ %C(blue)%C(bold)[%aN]%C(reset)" --decorate
