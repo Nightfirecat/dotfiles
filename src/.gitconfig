@@ -1,7 +1,10 @@
 [alias]
-	# TODO: fix columnizing (-l arg with v2.37+, or some other workaround?)
-	# TODO: wrap command column for long commands
-	alias = !git config --get-regexp '^alias\\.' | cut -d '.' -f '2-' | sed -re 's/^([^ ]+) /\\1*/g' | column -s '*' -t | sort
+	# TODO: add columnizing (after -l arg with linux-utils v2.37+, or some other workaround?)
+	#       eg. git config -l | grep '^alias\\.' | cut -d '.' -f '2-' | column -s '=' -t -l 2 | sort
+	# TODO: wrap command column for long commands (depends on above)
+	#       eg. column -s '=' -t -l 2 -N 'alias,val' -W val -d
+	# TODO: reduce extra space shown in command output from multiline aliases, see `co-pr`
+	alias = !git config -l | grep '^alias\\.' | cut -d '.' -f '2-' | sed -r -e 's/=/ = /' | sort
 	amend = commit --amend
 	amend-a = commit -a --amend
 	# TODO: fix below; that method is not accurate
