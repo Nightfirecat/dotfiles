@@ -53,3 +53,6 @@ elif [ $remove -eq 0 ]; then
 		fi
 	done
 fi
+
+# install vscode configs
+source vscode.sh

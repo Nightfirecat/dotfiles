@@ -1,0 +1,34 @@
+{
+  // custom settings
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/usr/bin/flatpak-spawn",
+      "args": ["--host", "--env=TERM=xterm-256color", "/bin/bash"]
+    },
+  },
+
+  // settings managed by VS Code UI changes, etc.
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'Courier New', Menlo, Monaco, Consolas, monospace, 'Droid Sans Fallback'",
+  "editor.fontLigatures": true,
+  "editor.insertSpaces": false,
+  "editor.minimap.maxColumn": 100,
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 4,
+  "explorer.autoReveal": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSave": "afterDelay",
+  "files.enableTrash": false,
+  "html.autoCreateQuotes": false,
+  "python.analysis.typeCheckingMode": "strict",
+  "workbench.startupEditor": "none",
+  "[markdown]": {
+    "editor.rulers": [120],
+    "editor.wordWrap": "off",
+  },
+  "[shellscript]": {
+    "editor.tabSize": 2,
+    "files.eol": "\n",
+  },
+}
