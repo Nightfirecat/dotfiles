@@ -29,10 +29,10 @@ esac
 
 if [[ ! -d "$VSCODE_CONFIG_PATH" ]]; then
 	echo "Could not locate vscode config path (expected at '$VSCODE_CONFIG_PATH')"
-	return 1
+	return
 elif ! type "${VSCODE_BINARY[0]}" >/dev/null 2>/dev/null; then
 	echo "Could not identify vscode binary (expected '${VSCODE_BINARY[*]}')"
-	return 2
+	return
 fi
 
 # install extensions
