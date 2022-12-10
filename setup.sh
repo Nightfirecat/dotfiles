@@ -17,7 +17,9 @@ SRC_DIR="$DIR/src"
 copy_files=()
 files_to_remove=()
 while IFS=  read -r -d $'\0'; do
-	copy_files+=( "$(basename "$REPLY")" )
+	# remove leading $SRC_DIR/ from found files
+	# this allows directories to be preserved
+	copy_files+=( "${REPLY//$SRC_DIR\//}" )
 done < <(find "$SRC_DIR" -type f -print0)
 
 if [ $remove -eq 1 ]; then
@@ -49,6 +51,9 @@ elif [ $remove -eq 0 ]; then
 		if [[ -h "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
 			echo "Skipping '${source}' -> '${target}' link as it is already linked"
 		else
+			# NOTE: This applies 0700 permissions only to the deepest directory
+			# shellcheck disable=SC2174
+			mkdir -m 0700 -p "$(dirname "$target")"
 			ln -sv "$source" "$target"
 		fi
 	done
@@ -56,3 +61,6 @@ fi
 
 # install vscode configs
 source vscode.sh
+
+# set up SSH config and create key if needed
+source ssh.sh
