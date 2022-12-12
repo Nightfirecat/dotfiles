@@ -97,6 +97,7 @@ alias ip='ip --color=auto'
 alias tree='tree -Csuh'
 alias ffmpeg='ffmpeg -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
+alias nohup='nohup >/dev/null &>/dev/null'
 
 # simple shortcuts
 alias aliases='alias -p'
