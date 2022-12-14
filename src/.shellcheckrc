@@ -1,2 +1,3 @@
 # ignore "Not following" errors; they usually can't be automatically resolved
+disable=SC1090
 disable=SC1091

@@ -78,5 +78,10 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 	eval "$(ssh-agent -s)"
 fi
 
+# source post-bash_profile script (if present)
+if [ -f ~/.bash_profile.after ]; then
+	. ~/.bash_profile.after
+fi
+
 # if running interactively, source .bashrc
 [ -n "$PS1" ] && source "$HOME/.bashrc"

@@ -628,3 +628,9 @@ PS1+='\n'
 PS1+='\[$(_ps1_color preprompt)\]\$\[$(_ps1_color prompt)\] '
 PS2='\[$(_ps1_color preprompt)\]>\[$(_ps1_color prompt)\] '
 PROMPT_COMMAND="_bashrc_prompt_command"
+
+
+# source post-bashrc script (if present)
+if [ -f ~/.bashrc.after ]; then
+	. ~/.bashrc.after
+fi
