@@ -51,9 +51,15 @@ elif [ $remove -eq 0 ]; then
 		if [[ -h "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
 			echo "Skipping '${source}' -> '${target}' link as it is already linked"
 		else
-			# NOTE: This applies 0700 permissions only to the deepest directory
-			# shellcheck disable=SC2174
-			mkdir -m 0700 -p "$(dirname "$target")"
+			target_dir="$(dirname "$target")"
+			while [ ! -d "$target_dir" ]; do
+				target_parent="$target_dir"
+				while [ ! -d "$(dirname "$target_parent")" ]; do
+					target_parent="$(dirname "$target_parent")"
+				done
+				mkdir -vm 0700 "$target_parent"
+			done
+
 			ln -sv "$source" "$target"
 		fi
 	done
