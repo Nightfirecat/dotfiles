@@ -38,7 +38,7 @@ fi
 # install extensions
 while read -r line; do
 	"${VSCODE_BINARY[@]}" --install-extension "$line"
-done < vscode/extensions
+done < "$DIR"/vscode/extensions
 
 # backup settings/keybinds files, then create symlinks
 # TODO: do the same for snippets dir files

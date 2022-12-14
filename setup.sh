@@ -60,7 +60,7 @@ elif [ $remove -eq 0 ]; then
 fi
 
 # install vscode configs
-source vscode.sh
+source "$DIR"/vscode.sh
 
 # set up SSH config and create key if needed
-source ssh.sh
+source "$DIR"/ssh.sh
