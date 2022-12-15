@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+# don't require ssh key setup if user is root
+if [ "$EUID" -eq 0 ]; then
+	return
+fi
+
 # set 0600 permissions on config file
 # (setting permissions on a symlink does nothing; see chmod(1))
 chmod 0600 "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )/src/.ssh/config"
