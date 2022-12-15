@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Use a different JAVA_HOME and maven directory than what is defined in `.bash_profile`
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH="${PATH}:/usr/bin/maven/bin"

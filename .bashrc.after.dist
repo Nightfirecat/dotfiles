@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Re-alias and unalias programs which cause issues on this system
+alias ls='ls -h --color' # MacOS ls does not support --show-control-chars :(
+alias ll='ls -lv'        # MacOS ls does not support --group-directories-first :(
+alias rm                 # MacOS rm does not support --preserve-root :(
+unalias chmod            # MacOS chmod does not support --preserve-root :(

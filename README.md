@@ -28,6 +28,19 @@ directory](https://wiki.archlinux.org/title/XDG_Base_Directory#User_directories)
 Once completed, all necessary symlinks will be created for environment setup. Restart your login for the `.bash_profile`
 to take effect.
 
+## Post-setup
+
+There are a few optional files which can be created in the home directory after setup is complete which can aid in
+environment setup:
+
+* **`.user.gitconfig`**: This is primarily used as a way to set up GPG commit signing [(as shown in
+  `.user.gitconfig.dist`)](./.user.gitconfig.dist), but can also be used to change the git user name or email on systems
+  which should use something besides your personal details. (eg. work email on a work machine)
+* **`.bash_profile.after`** and **`.bashrc.after`**: These files can be created to run following completion of
+  `.bash_profile` and `.bashrc`, respectively. This is primarily useful for overriding environment variables pointing to
+  paths of binaries, or adjust aliases which don't work in environments with varying coreutils support for convenience
+  flags.
+
 ## Uninstall
 
 Run `setup.sh --remove` to clear any symlinks created by the setup process.
