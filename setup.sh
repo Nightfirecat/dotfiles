@@ -33,13 +33,16 @@ if [ $remove -eq 1 ]; then
 elif [ $remove -eq 0 ]; then
 	# Ensure all files are absent in $HOME
 	for file in "${copy_files[@]}"; do
-		if [ -e "${HOME}/${file}" ] && ! [ -L "${HOME}/${file}" ]; then
+		source="${SRC_DIR}/${file}"
+		target="${HOME}/${file}"
+		if { [ -e "$target" ] && ! [ -L "$target" ]; } \
+			|| { [ -L "$target" ] && [[ "$source" != "$(readlink -f "$target")" ]]; }; then
 			files_to_remove+=( "$file" )
 		fi
 	done
 
 	if [ "${#files_to_remove}" -ne 0 ]; then
-		echo "Remove the following files from home directory and re-run setup!"
+		echo "Remove the following files/symlinks from home directory and re-run setup!"
 		printf '%s\n' "${files_to_remove[@]}"
 		exit 1
 	fi
