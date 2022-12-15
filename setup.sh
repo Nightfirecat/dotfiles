@@ -70,3 +70,6 @@ source "$DIR"/vscode.sh
 
 # set up SSH config and create key if needed
 source "$DIR"/ssh.sh
+
+# create GPG key if needed
+source "$DIR"/gpg.sh
