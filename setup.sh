@@ -12,6 +12,11 @@ fi
 
 DIR="$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )"
 SRC_DIR="$DIR/src"
+POST_SETUP_SCRIPTS=(
+	vscode.sh # install vscode configs
+	ssh.sh    # set up SSH config and create key if needed
+	gpg.sh    # create GPG key if needed
+)
 
 # read file basenames to copy_files array
 copy_files=()
@@ -68,11 +73,6 @@ elif [ $remove -eq 0 ]; then
 	done
 fi
 
-# install vscode configs
-source "$DIR"/vscode.sh
-
-# set up SSH config and create key if needed
-source "$DIR"/ssh.sh
-
-# create GPG key if needed
-source "$DIR"/gpg.sh
+for script in "${POST_SETUP_SCRIPTS[@]}"; do
+	source "${DIR}/${script}"
+done
