@@ -81,3 +81,6 @@
 [user]
 	name = Jordan Atwood
 	email = nightfirecat@nightfirec.at
+
+[include]
+	path = ~/.user.gitconfig
