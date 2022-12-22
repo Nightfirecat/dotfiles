@@ -2,5 +2,7 @@
 [commit]
 	gpgsign = true
 [user]
+	email = johnson@aperturescience.example
+	name = Cave Johnson
 	# get this via `gpg --list-secret-keys --keyid-format=short`
 	signingKey = 2D73A6DF
