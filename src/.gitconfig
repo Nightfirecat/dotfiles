@@ -58,9 +58,6 @@
 	prune = true
 [help]
 	autocorrect = 20
-[include]
-	# Define system-specific user configs such as GPG signing key
-	path = ~/.user.gitconfig
 [interactive]
 	# Build or install `diff-highlight` to some $PATH present location for
 	# improved interactive diff highlights. Falls back on plain `core.pager` if
@@ -89,4 +86,6 @@
 	email = nightfirecat@nightfirec.at
 
 [include]
+	# Define system-specific configs such as GPG signing key or alternate name
+	# and email
 	path = ~/.user.gitconfig
