@@ -61,6 +61,12 @@
 [include]
 	# Define system-specific user configs such as GPG signing key
 	path = ~/.user.gitconfig
+[interactive]
+	# Build or install `diff-highlight` to some $PATH present location for
+	# improved interactive diff highlights. Falls back on plain `core.pager` if
+	# not present.
+	# See: https://git.kernel.org/pub/scm/git/git.git/tree/contrib/diff-highlight/README
+	diffFilter = ((type diff-highlight >/dev/null 2>&1 && diff-highlight) || $(git config core.pager))
 [log]
 	follow = true
 [pager]
