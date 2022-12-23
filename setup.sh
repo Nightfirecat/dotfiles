@@ -13,9 +13,10 @@ fi
 DIR="$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )"
 SRC_DIR="$DIR/src"
 POST_SETUP_SCRIPTS=(
-	vscode.sh # install vscode configs
-	ssh.sh    # set up SSH config and create key if needed
-	gpg.sh    # create GPG key if needed
+	vscode.sh         # install vscode configs
+	ssh.sh            # set up SSH config and create key if needed
+	gpg.sh            # create GPG key if needed
+	diff-highlight.sh # build diff-highlight script from git source
 )
 
 # read file basenames to copy_files array
