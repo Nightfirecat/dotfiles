@@ -7,6 +7,7 @@
 	alias = !git config -l | grep '^alias\\.' | cut -d '.' -f '2-' | sed -r -e 's/=/ = /' | sort
 	amend = commit --amend
 	amend-a = commit -a --amend
+	chmod = "!f() { chmod_flag=$1 && shift && git add --chmod=$chmod_flag $@ && chmod $chmod_flag $@; }; f"
 	# TODO: fix below; that method is not accurate
 #	check-merge = "!f() { output=$(git format-patch ${1:-master} --stdout | git apply --3way --check - 2>/dev/null); exit_code=$?; if [ $exit_code != '0' ] && [ $exit_code != '128' ]; then echo 'Merge conflicts exist! See `git apply` output below:'; echo; echo $output; fi; }; f"
 	co-pr = "!f() { \
