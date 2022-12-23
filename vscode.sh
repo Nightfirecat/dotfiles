@@ -29,9 +29,11 @@ esac
 
 if [[ ! -d "$VSCODE_CONFIG_PATH" ]]; then
 	echo "Could not locate vscode config path (expected at '$VSCODE_CONFIG_PATH')"
+	echo "Skipping vscode setup"
 	return
 elif ! type "${VSCODE_BINARY[0]}" >/dev/null 2>/dev/null; then
 	echo "Could not identify vscode binary (expected '${VSCODE_BINARY[*]}')"
+	echo "Skipping vscode setup"
 	return
 fi
 
