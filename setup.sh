@@ -75,5 +75,5 @@ elif [ $remove -eq 0 ]; then
 fi
 
 for script in "${POST_SETUP_SCRIPTS[@]}"; do
-	source "${DIR}/${script}"
+	source "${DIR}/post-setup/${script}"
 done

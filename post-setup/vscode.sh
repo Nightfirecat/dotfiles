@@ -45,7 +45,7 @@ done < "$DIR"/vscode/extensions
 # backup settings/keybinds files, then create symlinks
 # TODO: do the same for snippets dir files
 for file in settings.json keybindings.json; do
-	source="$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )/vscode/$file"
+	source="${DIR}/vscode/$file"
 	target="$VSCODE_CONFIG_PATH/$file"
 	if [[ -h "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
 		echo "Skipping '$source' -> '$target' link as it is already linked"
