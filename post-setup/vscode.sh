@@ -47,7 +47,7 @@ done < "$DIR"/vscode/extensions
 for file in settings.json keybindings.json; do
 	source="${DIR}/vscode/$file"
 	target="$VSCODE_CONFIG_PATH/$file"
-	if [[ -h "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
+	if [[ -L "$target" ]] && [[ "$source" == "$(readlink -f "$target")" ]]; then
 		echo "Skipping '$source' -> '$target' link as it is already linked"
 		continue
 	elif [[ -f "$target" ]]; then
