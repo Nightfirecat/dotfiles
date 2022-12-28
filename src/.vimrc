@@ -65,7 +65,7 @@ set visualbell
 
 " And reset the terminal code for the visual bell. If visualbell is set, and
 " this line is also included, vim will neither flash nor beep. If visualbell
-" is unsetl, this does nothing.
+" is unset, this does nothing.
 set t_vb=
 
 " Set the command window height to 2 lines, to avoid many cases of having to
