@@ -14,6 +14,7 @@
 	           [ $# -ne 2 ] && echo 'Two arguments required, PR # and branch name' && exit 1; \
 	           git fetch upstream pull/$1/head:$2-$1 && git checkout $2-$1 && git merge master --no-gpg-sign --no-edit; \
 	         }; f"
+	diffc = diff --cached
 	fixup = commit --amend --no-edit
 	fixup-a = commit -a --amend --no-edit
 	full-diff = !git --no-pager diff
