@@ -22,6 +22,9 @@ set enable-bracketed-paste
 # Displays possible completions using different colors to indicate their file type.
 set colored-stats on
 
+# Color the completion prefix differently in completion results.
+set colored-completion-prefix on
+
 # Completed names which are symbolic links to directories have a slash appended.
 set mark-symlinked-directories on
 
