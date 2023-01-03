@@ -7,8 +7,7 @@ if [ -f ~/.profile ]; then
 fi
 
 ### environment vars
-# Ensure $HOME/.bin exists, add it to PATH
-mkdir -vp "$HOME/.bin"
+# add $HOME/.bin to PATH (this is created via dotfiles setup)
 export PATH="${PATH}:$HOME/.bin"
 
 # some programs (pip, notably) install into ~/.local/bin, add that to PATH too
