@@ -385,7 +385,15 @@ function _bashrc_.complete {
 		return 1
 	fi
 
-	local parent_depth path_array i parent_path word_list matched_word
+	COMPREPLY=()
+
+	# don't try to find matches if the search term starts with '/'
+	if [[ "${word:0:1}" == '/' ]]; then
+		return
+	fi
+
+	local parent_depth path_array i IGNORE_CASE search_path search_term \
+	      search_word matched_words matched_word
 	parent_depth="${cmd//.}"
 	if [ -z "$parent_depth" ]; then
 		parent_depth=1
@@ -394,18 +402,62 @@ function _bashrc_.complete {
 	for (( i=0; i<parent_depth; i++ )); do
 		path_array+=( '..' )
 	done
-	parent_path="$(_bashrc_join_by '/' "${path_array[@]}")"
 
-	COMPREPLY=()
-	word_list="$(
-		printf "%s\\n" "$parent_path"/*/ |
-		sed -e 's|^\(../\)*||' -e 's| |\\ |g'
-	)"
-	while IFS='' read -r matched_word; do
-		if [[ "$matched_word" =~ ^$word ]]; then
-			COMPREPLY+=( "$matched_word" )
+	# don't append a space to completed words
+	compopt -o nospace
+
+	# save configured value of readline's completion-ignore-case value to match
+	# behavior
+	IGNORE_CASE=( "$(
+		bind -V |
+		grep 'completion-ignore-case' |
+		grep -q "\`on'$" &&
+			echo '-i'
+	)" )
+
+	# search_path and search_term store the currently-searched path and
+	# remaining search term from the original search word, after traversing into
+	# directories. Eg. `.. foo/bar/baz`
+	search_path="$(_bashrc_join_by '/' "${path_array[@]}")"
+	search_term="$word"
+	while # do-while loop
+		# search_word refers to the string/directory to search for in the
+		# current directory, eg. `foo/`, `bar/`, or `baz`
+		search_word="$(sed -r -e 's|^([^/]+/?).*$|\1|' <<< "$search_term")"
+		# directories matching the search word
+		matched_words=()
+		while IFS='' read -r matched_word; do
+			# this loop is executed once with an empty string value even if
+			# `find` yields no results; it's not a valid entry, so skip it
+			if [[ -z "$matched_word" ]]; then
+				continue
+			fi
+
+			# add found directory as a match if the search word is present as a
+			# prefix of it
+			if grep -q -E "${IGNORE_CASE[@]}" "/${search_word}[^/]*/?$" <<< "${matched_word}/"; then
+				matched_words+=( "$matched_word/" )
+			fi
+		done <<< "$(find "$search_path" -mindepth 1 -maxdepth 1 -type d | sort -V)"
+
+		# continue searching through the next nested directory if only one
+		# result was found (assumed to be exact result) and the remaining search
+		# term has more directories to search through
+		if [[ "${#matched_words[@]}" == 1 && "$search_term" == */* ]]; then
+			search_path="${matched_words[0]}"
+			search_term="$(cut -d '/' -f 2- <<< "$search_term")"
+			continue
 		fi
-	done <<< "$word_list"
+
+		for matched_word in "${matched_words[@]}"; do
+			# transform each line in the following manner:
+			#  1. remove all leading `../` so the file or directory appears as
+			#     it would from the parent path
+			#  2. escape ` ` as would be needed to prevent argument splitting in
+			#     the shell
+			COMPREPLY+=( "$(sed -e 's|^\(../\)*||' -e 's| |\\ |g' <<< "$matched_word")" )
+		done
+	do break; done
 }
 
 # Prints color sequence according to the token type passed
