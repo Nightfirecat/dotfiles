@@ -6,12 +6,19 @@ if type diff-highlight >/dev/null 2>&1; then
 	return
 fi
 
+REQUIRED_BUILD_FILES=(
+	Makefile
+	diff-highlight.perl
+	DiffHighlight.pm
+)
+
 # create temp directory
 pushd "$(mktemp -d)" >/dev/null
 
-# copy the diff-highlight source files distributed with git to this temp
-# directory and build it
-cp -R --preserve=mode,timestamps "$(dpkg -L git | grep diff-highlight | head -1)"/* .
+# fetch diff-highlight build files and build the binary
+for file in "${REQUIRED_BUILD_FILES[@]}"; do
+	curl -s -O "https://git.kernel.org/pub/scm/git/git.git/plain/contrib/diff-highlight/${file}"
+done
 make --quiet
 
 # move the created script to ~/.bin, which is in PATH
