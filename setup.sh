@@ -28,6 +28,27 @@ while IFS=  read -r -d $'\0'; do
 	copy_files+=( "${REPLY//$SRC_DIR\//}" )
 done < <(find "$SRC_DIR" -type f -print0)
 
+# clear symlinks pointing to non-existent src files
+symlink_check_dirs=()
+while IFS=  read -r -d $'\0'; do
+	symlink_check_dirs+=( "$(sed -r -e "s|^${SRC_DIR}/?||" <<< "$REPLY")" )
+done < <(find "$SRC_DIR" -type d -print0)
+for dir in "${symlink_check_dirs[@]}"; do
+	while IFS=  read -r -d $'\0'; do
+		# it is possible for `readlink` to fail if the link target does not
+		# exist (within multiple non-existent subdirectories?); such entries
+		# aren't valid to check anyway, skip them
+		link_target="$(readlink -f "$REPLY")" || continue
+
+		# if a symlink is found which points to a SRC_DIR file but there's no
+		# file that it's pointing at, it's an old and outdated link; delete it
+		if [[ "$link_target" =~ ^"$SRC_DIR" && ! -f "$link_target" ]]; then
+			echo "Removing dead dotfiles symlink: '$REPLY'"
+			rm "$REPLY"
+		fi
+	done < <(find "$HOME/$dir" -maxdepth 1 -type l -print0)
+done
+
 if [ $remove -eq 1 ]; then
 	for file in "${copy_files[@]}"; do
 		if [ -L "$file" ]; then
