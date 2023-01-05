@@ -246,7 +246,7 @@ function _bashrc_randomcolor {
 # prints a message of the day (time, shell info, system info, etc.)
 function _bashrc_motd {
 	if type neofetch >/dev/null 2>/dev/null; then
-		neofetch --config ~/.neofetch.config.json 2>/dev/null
+		neofetch --config ~/.neofetch.config.conf 2>/dev/null
 		return
 	fi
 
