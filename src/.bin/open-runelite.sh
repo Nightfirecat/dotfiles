@@ -46,7 +46,8 @@ function orl_exit {
 }
 trap orl_exit EXIT
 
-RUNELITE_TARGET_COMMIT_FILENAME='runelite-client/target/commit'
+DIR="$(dirname "${BASH_SOURCE[0]}")"
+RUNELITE_TARGET_COMMIT_FILENAME="$DIR/commit"
 function build_client {
 	# Update local dev branch and build
 	git checkout dev || git checkout -b dev upstream/master
@@ -54,6 +55,9 @@ function build_client {
 	git merge --no-gpg-sign --no-edit "${BRANCHES_TO_MERGE[@]}" || exit 1
 	mvn clean package -DskipTests -U || exit 1
 	git checkout -
+	# copy shaded jar to script's directory, removing any old shaded jars
+	find "$DIR" -name 'client-*-SNAPSHOT-shaded.jar' -delete
+	cp -f "$COMPILED_SHADED_JAR" "$DIR"
 	echo "$UPSTREAM_MASTER_COMMIT" > "$RUNELITE_TARGET_COMMIT_FILENAME"
 }
 
@@ -72,15 +76,17 @@ MAJOR_VERSION="$(cut -d '.' -f 1 <<< "$PREVIOUS_TAG")"
 MINOR_VERSION="$(cut -d '.' -f 2 <<< "$PREVIOUS_TAG")"
 PATCH_VERSION="$(cut -d '.' -f 3 <<< "$PREVIOUS_TAG")"
 NEXT_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.$((PATCH_VERSION + 1))"
-SHADED_JAR=runelite-client/target/client-"${NEXT_VERSION}"-SNAPSHOT-shaded.jar
+SHADED_JAR_FILENAME="client-${NEXT_VERSION}-SNAPSHOT-shaded.jar"
+COMPILED_SHADED_JAR=runelite-client/target/"$SHADED_JAR_FILENAME"
+CACHED_JAR="$DIR"/"$SHADED_JAR_FILENAME"
 
 # build a new client if one doesn't already exist or if the current shaded jar
 # is older than the max rebuild age and is behind upstream master's commit
-if ! [ -f "$SHADED_JAR" ]; then
+if ! [ -f "$CACHED_JAR" ]; then
 	echo "No build exists for current snapshot; rebuilding"
 	build_client
 else
-	SHADED_JAR_MTIME="$(stat -c %Y "$SHADED_JAR")"
+	SHADED_JAR_MTIME="$(stat -c %Y "$CACHED_JAR")"
 	CURRENT_MTIME="$(date +%s)"
 	if [ "$(( "$CURRENT_MTIME" - "$SHADED_JAR_MTIME" ))" -gt "$MAX_AGE_BEFORE_REBUILD" ]; then
 		if ! [ -f "$RUNELITE_TARGET_COMMIT_FILENAME" ] \
@@ -96,4 +102,4 @@ else
 fi
 
 # run the dev client
-nohup java -ea -Drunelite.pluginhub.version="${PREVIOUS_TAG}" -jar runelite-client/target/client-"${NEXT_VERSION}"-SNAPSHOT-shaded.jar --developer-mode --debug </dev/null >/dev/null 2>&1 &
+nohup java -ea -Drunelite.pluginhub.version="${PREVIOUS_TAG}" -jar "$CACHED_JAR" --developer-mode --debug </dev/null >/dev/null 2>&1 &
