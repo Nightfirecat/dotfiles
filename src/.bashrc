@@ -530,27 +530,30 @@ function ff {
 # simple extract script
 # source: http://tldp.org/LDP/abs/html/sample-bashrc.html
 function extract {
-	if [ -f "$1" ]; then
-		case "$1" in
-			*.tar.bz2)  tar xvjf "$1"                                  ;;
-			*.tar.gz)   tar xvzf "$1"                                  ;;
-			*.tar.xz)   tar xJf "$1"                                   ;;
-			*.bz2)      bunzip2 "$1"                                   ;;
-			*.rar)      unrar x "$1"                                   ;;
-			*.gz)       gunzip "$1"                                    ;;
-			*.tar)      tar xvf "$1"                                   ;;
-			*.tbz2)     tar xvjf "$1"                                  ;;
-			*.tgz)      tar xvzf "$1"                                  ;;
-			*.xz)       xz -dk "$1"                                    ;;
-			*.zip)      mkdir "${1%.*}" && unzip "$1" -d "${1%.zip}"   ;;
-			*.Z)        uncompress "$1"                                ;;
-			*.7z)       7z x "$1"                                      ;;
-			*)          echo "'$1' cannot be extracted "\
-			                 "via >${FUNCNAME[0]}<" ;;
-		esac
-	else
-		echo "'$1' is not a valid file!"
-	fi
+	for arg in "$@"; do
+		if [ -f "$arg" ]; then
+			dir="${arg%%.*}"
+			mkdir "$dir"
+			case "$arg" in
+				*.tar.bz2)  tar xvjf "$arg" -C "$dir"              ;;
+				*.tar.gz)   tar xvzf "$arg" -C "$dir"              ;;
+				*.tar.xz)   tar xJf "$arg" -C "$dir"               ;;
+				*.rar)      unrar x "$arg" "$dir"                  ;;
+				*.tar)      tar xvf "$arg" -C "$dir"               ;;
+				*.tbz2)     tar xvjf "$arg" -C "$dir"              ;;
+				*.tgz)      tar xvzf "$arg" -C "$dir"              ;;
+				*.zip)      unzip "$arg" -d "$dir"                 ;;
+				*.7z)       7z x "$arg" -o"$dir"                   ;;
+				*.bz2)      bunzip2 -ck "$arg" > "$dir/${arg%.*}"  ;;
+				*.gz|*.Z)   gunzip -ck "$arg" > "$dir/${arg%.*}"   ;;
+				*.xz)       unxz -ck "$arg" > "$dir/${arg%.*}"     ;;
+				*)          echo "'$arg' cannot be extracted "\
+				                 "via >${FUNCNAME[0]}<"            ;;
+			esac
+		else
+			echo "'$arg' is not a valid file!"
+		fi
+	done
 }
 
 # functions for fast traversal through parent directories
