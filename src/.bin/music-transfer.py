@@ -95,6 +95,8 @@ for file in source_files:
 print('[DEBUG] Filtering files already present in destination')
 # NOTE: this assumes all filenames are unique, which should already be the case in my music library
 #       verify via `find . -type f -not -name '*.jpg' -not -name '*.png' -not -name '*.txt' -exec basename {} \; | sort | uniq -d`
+# TODO: add a hash check so that we can overwrite songs on the target if source
+#       has a version which is different (new metadata, or better version)
 for source_path in list(source_files)[:]:
 	found_destination_path: Union[Path, None] = next((destination_file for destination_file in destination_files if destination_file.stem == munge_path(source_path.stem)), None)
 	if found_destination_path:
