@@ -17,6 +17,7 @@ BRANCHES_TO_MERGE=(
 	toa-consumables
 	multi-step-cryptic-spade
 	quest-speedrunning-widget-overlays
+	fixed-thrall-timer
 )
 MAX_AGE_BEFORE_REBUILD="$(( 24 * 60 * 60 ))" # 1 day
 UPSTREAM_REMOTE='upstream'
