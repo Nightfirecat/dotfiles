@@ -7,8 +7,25 @@ endif
 " Get the defaults that most users want
 source $VIMRUNTIME/defaults.vim
 
+" Use Vim settings rather than Vi settings
+" This is run early to avoid clobbering other options as a side effect.
+if &compatible
+	set nocompatible
+endif
+
+" This achieves the same as above iff +eval feature is missing.
+silent! while 0
+	set nocompatible
+silent! endwhile
+
 " Don't keep context lines around cursor
 set scrolloff=0
+
+set history=50        " keep 50 lines of command line history
+set ruler             " show cursor position at all times
+set showcmd           " display incomplete commands
+set wildmenu          " display completion matches in a status line
+set display=truncate  " show @@@ in the last line if it is truncated
 
 " do not keep backup files or undo files (they clutter filesystem)
 set nobackup
@@ -30,6 +47,11 @@ augroup END
 " loaded during initialization.
 if has('syntax') && has('eval')
 	packadd! matchit
+endif
+
+" Perform incremental searching when it's possible to timeout
+if has('reltime')
+	set incsearch
 endif
 
 " Enable re-use of the same window to switch from an unsaved buffer without
@@ -83,6 +105,21 @@ set pastetoggle=<F11>
 " Use one tab when using Vim shifts
 set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 
+" Allow backspace to go over everything in insert mode
+set backspace=indent,eol,start
+
+" In many terminal emulators the mouse works just fine. By enabling it you can
+" position the cursor, Visually select and scroll with the mouse.
+" Only xterm can grab the mouse events when using the shift key, for other
+" terminals use ":", select text, and press Esc.
+if has('mouse')
+	if &term =~ 'xterm'
+		set mouse=a
+	else
+		set mouse=nvi
+	endif
+endif
+
 " Jump to last position when reopening a file
 if has('autocmd')
 	au BufReadPost * if line ("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -92,3 +129,21 @@ endif
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
+
+" Execute only if Vim is compiled with +eval
+if 1
+	" Enable file type detection.
+	" Use the default filetype settings, so that mail gets 'tw' set to 72,
+	" 'cindent' is on in C files, etc.
+	" Also load indent files to automatically do laugnage-dependent indenting.
+	" Revert with ":filetype off".
+	filetype plugin indent on
+endif
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Revert with ":delcommand DiffOrig".
+if !exists(":DiffOrig")
+	command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+		\ | wincmd p | diffthis
+endif
