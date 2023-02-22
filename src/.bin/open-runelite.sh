@@ -14,7 +14,6 @@ BRANCHES_TO_MERGE=(
 	#differentiate-gauntlet-loots # conflicts with discord sub-regions
 	charlie-texts
 	discord-sub-regions
-	toa-consumables
 	multi-step-cryptic-spade
 	quest-speedrunning-widget-overlays
 	fixed-thrall-timer
