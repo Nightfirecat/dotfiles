@@ -101,6 +101,7 @@ alias nohup='nohup >/dev/null &>/dev/null'
 
 # simple shortcuts
 alias aliases='alias -p'
+alias -- -='cd -'
 alias h='history'
 alias j='jobs -l'
 alias which='type -a'
