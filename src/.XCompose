@@ -1,0 +1,36 @@
+# source current locale's mappings
+# on most of my systems, this is found in /usr/share/X11/locale/en_US.UTF-8/Compose
+include "%L"
+
+# non-English characters
+<Multi_key> <p> <i>                             : "π" # GREEK SMALL LETTER PI
+
+# spaces
+<Multi_key> <n> <b> <s> <p>                     : " " nobreakspace # NON-BREAKING SPACE
+<Multi_key> <space> <0>                         : "​" U200b # ZERO WIDTH SPACE
+<Multi_key> <z> <w> <s> <p>                     : "​" U200b # ZERO WIDTH SPACE
+
+# math
+<Multi_key> <3> <v> <slash>                     : "∛" U221b # CUBE ROOT
+<Multi_key> <3> <slash> <v>                     : "∛" U221b # CUBE ROOT
+<Multi_key> <4> <v> <slash>                     : "∜" U221c # FOURTH ROOT
+<Multi_key> <4> <slash> <v>                     : "∜" U221c # FOURTH ROOT
+<Multi_key> <minus> <asciitilde>                : "≂" U2242 # MINUS TILDE
+<Multi_key> <asciitilde> <minus>                : "≃" U2243 # ASYMPTOTICALLY EQUAL TO
+<Multi_key> <slash> <asciitilde> <minus>        : "≄" U2244 # NOT ASYMPTOTICALLY EQUAL TO
+<Multi_key> <exclam> <asciitilde> <minus>       : "≄" U2244 # NOT ASYMPTOTICALLY EQUAL TO
+<Multi_key> <asciitilde> <equal>                : "≅" U2245 # APPROXIMATELY EQUAL TO
+<Multi_key> <asciitilde> <slash> <equal>        : "≆" U2246 # APPROXIMATELY BUT NOT ACTUALLY EQUAL TO
+<Multi_key> <asciitilde> <exclam> <equal>       : "≆" U2246 # APPROXIMATELY BUT NOT ACTUALLY EQUAL TO
+<Multi_key> <slash> <asciitilde> <equal>        : "≇" U2247 # NEITHER APPROXIMATELY NOR ACTUALLY EQUAL TO
+<Multi_key> <exclam> <asciitilde> <equal>       : "≇" U2247 # NEITHER APPROXIMATELY NOR ACTUALLY EQUAL TO
+<Multi_key> <slash> <asciitilde> <asciitilde>   : "≉" U2249 # NOT ALMOST EQUAL TO
+<Multi_key> <exclam> <asciitilde> <asciitilde>  : "≉" U2249 # NOT ALMOST EQUAL TO
+<Multi_key> <exclam> <equal>                    : "≠" U2260 # NOT EQUAL TO
+# overrides X default mapping of <Multi_key> <slash> <less> : "\\"
+<Multi_key> <slash> <less>                      : "≮" U226e # NOT LESS THAN
+<Multi_key> <exclam> <less>                     : "≮" U226e # NOT LESS THAN
+<Multi_key> <slash> <greater>                   : "≯" U226f # NOT GREATER THAN
+<Multi_key> <exclam> <greater>                  : "≯" U226f # NOT GREATER THAN
+<Multi_key> <less> <asciitilde>                 : "≲" U2272 # LESS THAN OR EQUIVALENT TO
+<Multi_key> <greater> <asciitilde>              : "≳" U2273 # GREATER THAN OR EQUIVALENT TO
