@@ -71,6 +71,10 @@
 	diffFilter = ((type diff-highlight >/dev/null 2>&1 && diff-highlight) || $(git config core.pager))
 [log]
 	follow = true
+[merge]
+	# TODO: Switch this to the even better "zdiff3" (zealous diff3) setting once
+	# git 2.35 is available in Debian stable
+	conflictstyle = diff3
 [notes]
 	displayRef = refs/notes/*
 [pager]
