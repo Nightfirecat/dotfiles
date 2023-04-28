@@ -1,5 +1,13 @@
 {
   // custom settings
+  "json.schemas": [{
+    "fileMatch": [
+      "/vscode/settings.json",
+    ],
+    "schema": {
+      "allowTrailingCommas": true,
+    },
+  }],
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.profiles.linux": {
     "bash": {
