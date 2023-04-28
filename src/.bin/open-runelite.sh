@@ -18,7 +18,7 @@ BRANCHES_TO_MERGE=(
 	quest-speedrunning-widget-overlays
 	fixed-thrall-timer
 )
-MAX_AGE_BEFORE_REBUILD="$(( 24 * 60 * 60 ))" # 1 day
+MAX_AGE_BEFORE_REBUILD="$(( 18 * 60 * 60 ))" # 18 hours
 UPSTREAM_REMOTE='upstream'
 UPSTREAM_BRANCH='master'
 for branch in "${BRANCHES_TO_MERGE[@]}"; do
