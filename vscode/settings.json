@@ -28,6 +28,11 @@
   "explorer.confirmDragAndDrop": false,
   "files.autoSave": "afterDelay",
   "files.enableTrash": false,
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.defaultGravatarsStyle": "identicon",
+  "gitlens.codeLens.scopes": [
+    "document"
+  ],
   "html.autoCreateQuotes": false,
   "python.analysis.typeCheckingMode": "strict",
   "workbench.startupEditor": "none",
