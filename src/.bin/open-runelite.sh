@@ -17,6 +17,8 @@ BRANCHES_TO_MERGE=(
 	multi-step-cryptic-spade
 	quest-speedrunning-widget-overlays
 	fixed-thrall-timer
+	fix-grand-exchange-offer-slot-wrapping
+	gwd-altar-timer
 )
 MAX_AGE_BEFORE_REBUILD="$(( 18 * 60 * 60 ))" # 18 hours
 UPSTREAM_REMOTE='upstream'
