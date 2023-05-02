@@ -674,6 +674,10 @@ _bashrc_motd
 PS1='\[\e]0;'"$PWD"'; \$?=$?\007\]'
 PS1+='\n'
 
+# set window title during command execution
+# format:  $PWD: (command)
+trap 'echo -ne "\033]0;$PWD: (${BASH_COMMAND})\007"' DEBUG
+
 # set first line
 # format:  [user@host path] (git branch)
 PS1+='\[$(_ps1_color bracket)\][\[$(_ps1_color user)\]\u\[$(_ps1_color @)\]@\[$(_ps1_color host)\]\[$(hostname -f 2>/dev/null || hostname)\] \[$(_ps1_color path)\]\w\[$(_ps1_color bracket)\]]\[$(_ps1_color branch)\]\[$(__git_ps1 2>/dev/null)\]\[$(_ps1_color prompt)\]'
