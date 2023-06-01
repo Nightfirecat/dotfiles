@@ -78,6 +78,9 @@ for line in open(paths_file, 'r'):
 					source_files.add(file_path)
 				else:
 					print(f'[TRACE] Unknown file extension of entry: {file}', file=sys.stderr)
+	elif not path.exists():
+		print(f'[ERROR] Could not find source path: {path}')
+		sys.exit(3)
 
 if len(source_files) == 0:
 	print('No source files to transfer')
