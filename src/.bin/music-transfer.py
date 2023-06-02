@@ -55,6 +55,7 @@ if os.path.isdir(destination_dir):
 					print(f'Ignoring duplicate input entry: {file}')
 				else:
 					destination_files.add(path)
+print(f'[DEBUG] Gathered {len(destination_files)} destination files')
 
 print('[DEBUG] Gathering source files list')
 source_files: Set[Path] = set()
@@ -85,6 +86,8 @@ for line in open(paths_file, 'r'):
 if len(source_files) == 0:
 	print('No source files to transfer')
 	sys.exit()
+else:
+    print(f'[DEBUG] Gathered {len(source_files)} source files')
 
 print('[DEBUG] Finding longest common prefix of source files')
 longest_prefix = next(iter(source_files)).parent
@@ -125,6 +128,7 @@ if len(destination_files) > 0:
 
 # TODO: list both number of files in songs list & number of files to be transferred
 print(f'Copying {len(source_files)} songs to {destination_dir}')
+print(f'[TRACE] Copying the following files to destination:\n{source_files}')
 
 for source_file in source_files:
 	source_copy_path = source_file.with_suffix('').as_posix().replace(longest_prefix.as_posix(), '', 1)
