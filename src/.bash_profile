@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# source ~/.profile if it exists
-if [ -f ~/.profile ]; then
-	# shellcheck disable=SC1090
-	. ~/.profile
-fi
-
 ### environment vars
 # add $HOME/.bin to PATH (this is created via dotfiles setup)
 export PATH="${PATH}:$HOME/.bin"
