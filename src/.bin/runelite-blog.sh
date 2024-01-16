@@ -111,7 +111,7 @@ git_username_trimmed="$(git config user.name | cut -d ' ' -f '1')"
 default_date='+1 day'
 BLOG_DATE="${blog_date:-$default_date}"
 BLOG_AUTHOR="${blog_author:-$git_username_trimmed}"
-git_shortlog_options=(--no-merges --perl-regexp '--author=^((?!Runelite auto updater|RuneLite Cache-Code Autoupdater).*)$' "${latest_tag}"..upstream/master)
+git_shortlog_options=(--no-merges --perl-regexp '--author=^((?!Runelite auto updater|RuneLite Cache-Code Autoupdater|RuneLite updater).*)$' "${latest_tag}"..upstream/master)
 SHORTLOG_SINCE_LAST_TAG="$(git -C "$repo_path" --no-pager shortlog "${git_shortlog_options[@]}")"
 NUMBER_OF_CONTRIBUTORS="$(git -C "$repo_path" --no-pager shortlog -s "${git_shortlog_options[@]}" | wc -l)"
 BLOG_POST_DATE="$(date -d "${BLOG_DATE} 10:00am" +'%Y-%m-%d-%H-%M')"
