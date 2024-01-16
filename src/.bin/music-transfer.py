@@ -30,7 +30,7 @@ KNOWN_EXTENSIONS: Set[str] = set([
 # see: https://stackoverflow.com/a/35352640/540162
 # getting filesystem type can be done like so: https://stackoverflow.com/a/25286268/540162
 def munge_path(path: str) -> str:
-	return re.sub(r'[\:*?"|<>]+', '-', path.encode('unicode_escape').decode('utf-8'))
+	return re.sub(r'[\\:*?"|<>]+', '-', path.encode('unicode_escape').decode('utf-8'))
 
 def main():
 	if len(sys.argv) != 3:
