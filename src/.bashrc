@@ -114,6 +114,7 @@ alias isodate='date -I'
 alias isotime='date -Ihours'
 alias headers='curl -I'              # get site headers
 alias headersc='curl -I --compress'  # test gzip/mod_deflate support
+alias auu='sudo apt update && sudo apt upgrade'
 
 # add colors for filetype and human-readable sizes in `ls`
 alias ls='ls -h --color --show-control-chars'
