@@ -173,3 +173,4 @@ ${SHORTLOG_SINCE_LAST_TAG}
 EOF
 
 echo 'Blog branch and structure created!'
+git status
