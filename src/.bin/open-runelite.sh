@@ -102,4 +102,4 @@ else
 fi
 
 # run the dev client
-nohup java -ea -Drunelite.pluginhub.version="${PREVIOUS_TAG}" -jar "$CACHED_JAR" --developer-mode --debug </dev/null >/dev/null 2>&1 &
+nohup java -ea -Drunelite.pluginhub.version="${PREVIOUS_TAG}" -jar "$CACHED_JAR" --developer-mode --debug --profile=main </dev/null >/dev/null 2>&1 &
