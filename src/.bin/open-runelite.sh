@@ -23,7 +23,7 @@ MAX_AGE_BEFORE_REBUILD="$(( 18 * 60 * 60 ))" # 18 hours
 UPSTREAM_REMOTE='upstream'
 UPSTREAM_BRANCH='master'
 for branch in "${BRANCHES_TO_MERGE[@]}"; do
-	if grep -qE '^internal' <<< "$branch"; then
+	if grep -q 'internal' <<< "$branch"; then
 		UPSTREAM_REMOTE='internal-upstream'
 		UPSTREAM_BRANCH='internal'
 		break
