@@ -34,6 +34,7 @@
 	pullrsurp = !git pull --rebase && git submodule update --recursive && git push
 	reauthor = "!git commit --amend --no-edit --author=\"$(git config user.name) <$(git config user.email)>\""
 	reword = commit --amend
+	r- = rebase -
 	shortstat = diff --shortstat
 	stat = diff --stat
 	sur = submodule update --recursive
