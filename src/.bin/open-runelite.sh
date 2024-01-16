@@ -50,8 +50,8 @@ DIR="$(dirname "${BASH_SOURCE[0]}")"
 RUNELITE_TARGET_COMMIT_FILENAME="$DIR/commit"
 function build_client {
 	# Update local dev branch and build
-	git checkout dev || git checkout -b dev upstream/master
-	git reset --hard upstream/master
+	git checkout dev || git checkout -b dev
+	git reset --hard "$UPSTREAM_REMOTE/$UPSTREAM_BRANCH"
 	git merge --no-gpg-sign --no-edit "${BRANCHES_TO_MERGE[@]}" || exit 1
 	mvn clean package -DskipTests -U || exit 1
 	git checkout -
