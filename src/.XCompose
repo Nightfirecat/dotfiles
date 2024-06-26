@@ -5,6 +5,10 @@ include "%L"
 # non-English characters
 <Multi_key> <p> <i>                             : "π" # GREEK SMALL LETTER PI
 
+# silly
+<Multi_key> <l> <o> <o> <k>                     : "ಠ_ಠ"
+<Multi_key> <s> <h> <r> <u> <g>                 : "¯\\_(ツ)_/¯"
+
 # spaces
 <Multi_key> <n> <b> <s> <p>                     : " " nobreakspace # NON-BREAKING SPACE
 <Multi_key> <space> <0>                         : "​" U200b # ZERO WIDTH SPACE
