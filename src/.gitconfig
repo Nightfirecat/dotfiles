@@ -40,6 +40,8 @@
 	sur = submodule update --recursive
 [apply]
 	whitespace = fix
+[branch]
+	sort = -committerdate
 [color]
 	branch = auto
 	diff = auto
