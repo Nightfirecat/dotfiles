@@ -94,6 +94,8 @@
 	fetch = +refs/notes/*:refs/notes/*
 [remote.upstream]
 	fetch = +refs/notes/*:refs/notes/*
+[rerere]
+	enabled = true
 [status]
 	submodulesummary = true
 [submodule]
