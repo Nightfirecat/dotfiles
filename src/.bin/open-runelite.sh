@@ -52,7 +52,9 @@ function build_client {
 	# Update local dev branch and build
 	git checkout dev || git checkout -b dev
 	git reset --hard "$UPSTREAM_REMOTE/$UPSTREAM_BRANCH"
-	git merge --no-gpg-sign --no-edit "${BRANCHES_TO_MERGE[@]}" || exit 1
+	for branch in "${BRANCHES_TO_MERGE[@]}"; do
+		git merge --no-gpg-sign --no-edit --rerere-autoupdate "$branch" || ( [[ -z "$(git rerere diff)" ]] && git commit --no-gpg-sign --no-edit) || exit 1
+	done
 	mvn clean package -DskipTests -U || exit 1
 	git checkout -
 	# copy shaded jar to script's directory, removing any old shaded jars
