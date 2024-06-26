@@ -13,8 +13,6 @@ SCAN_OUTPUT_DIR=~/Pictures/Scans
 TMP_DIR="$(mktemp -d --suffix='scans')"
 
 while
-	scan_output_filename=scan_"$(date +%Y-%m-%d-%H-%M-%S)"
-
 	page_number=1
 	while
 		echo "Scanning page $page_number"
@@ -29,6 +27,7 @@ while
 	echo
 
 	# convert image sequence to pdf
+	scan_output_filename=scan_"$(date +%Y-%m-%d-%H-%M-%S)"
 	convert "$TMP_DIR"/*.tiff "${SCAN_OUTPUT_DIR}/${scan_output_filename}_raw.pdf"
 
 	# compress pdf
